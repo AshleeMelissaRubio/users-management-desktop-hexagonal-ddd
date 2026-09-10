@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.util.Objects;
 import java.util.Properties;
 
-public final class AppProperties {
+public final class  AppProperties {
 
   private static final String PROPERTIES_FILE = "application.properties";
 
