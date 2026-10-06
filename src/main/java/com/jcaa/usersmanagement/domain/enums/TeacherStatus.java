@@ -1,5 +1,6 @@
 package com.jcaa.usersmanagement.domain.enums;
 
+import com.jcaa.usersmanagement.domain.exception.InvalidTeacherStatusException;
 import com.jcaa.usersmanagement.domain.exception.InvalidUserStatusException;
 
 public enum TeacherStatus {
@@ -14,6 +15,6 @@ public enum TeacherStatus {
                 return status;
             }
         }
-        //throw InvalidTeacherStatusException.becauseValueIsInvalid(value);
+        throw InvalidTeacherStatusException.becauseValueIsInvalid(value);
     }
 }

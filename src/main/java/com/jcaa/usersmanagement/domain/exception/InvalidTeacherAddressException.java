@@ -19,6 +19,6 @@ public class InvalidTeacherAddressException extends DomainException {
     }
 
     public static InvalidTeacherAddressException becauseLengthIsTooShort(final int minimumLength) {
-        return new InvalidTeacherAddressException(MESSAGE_TOO_SHORT, minimumLength);
+        return new InvalidTeacherAddressException(String.format(MESSAGE_TOO_SHORT, minimumLength));
     }
 }
