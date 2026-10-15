@@ -1,14 +1,24 @@
 package com.jcaa.usersmanagement.domain.valueobject;
 
-/**
- * Temporal Stub/Dummy para el módulo TFC.
- * Permite compilar y probar la rama feature/tfc de forma autónoma.
- * Será reemplazado automáticamente al hacer merge con la rama del módulo Teacher.
- */
+import com.jcaa.usersmanagement.domain.exception.InvalidTeacherIdException;
+
+import java.util.Objects;
+
 public record TeacherId(String value) {
     public TeacherId {
-        if (value == null || value.isBlank()) {
-            throw new IllegalArgumentException("Teacher ID cannot be null or empty");
+        final String normalizedValue = Objects.requireNonNull(value, "UserId cannot be null").trim();
+        validateNotEmpty(normalizedValue);
+        value = normalizedValue;
+    }
+
+    private static void validateNotEmpty(final String normalizedValue) {
+        if (normalizedValue.isEmpty()) {
+            throw InvalidTeacherIdException.becauseValueIsEmpty();
         }
+    }
+
+    @Override
+    public String toString() {
+        return value;
     }
 }
