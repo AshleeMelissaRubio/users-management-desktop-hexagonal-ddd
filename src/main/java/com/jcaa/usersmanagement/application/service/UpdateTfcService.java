@@ -1,12 +1,15 @@
 package com.jcaa.usersmanagement.application.service;
 
 import com.jcaa.usersmanagement.application.port.in.UpdateTfcUseCase;
+import com.jcaa.usersmanagement.application.port.out.GetTeacherByIdPort;
 import com.jcaa.usersmanagement.application.port.out.GetTfcByIdPort;
 import com.jcaa.usersmanagement.application.port.out.UpdateTfcPort;
 import com.jcaa.usersmanagement.application.service.dto.command.UpdateTfcCommand;
 import com.jcaa.usersmanagement.application.service.mapper.TfcApplicationMapper;
+import com.jcaa.usersmanagement.domain.exception.TeacherNotFoundException;
 import com.jcaa.usersmanagement.domain.exception.TfcNotFoundException;
 import com.jcaa.usersmanagement.domain.model.TfcModel;
+import com.jcaa.usersmanagement.domain.valueobject.TeacherId;
 import com.jcaa.usersmanagement.domain.valueobject.TfcId;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -19,6 +22,7 @@ public final class UpdateTfcService implements UpdateTfcUseCase {
 
     private final UpdateTfcPort updateTfcPort;
     private final GetTfcByIdPort getTfcByIdPort;
+    private final GetTeacherByIdPort getTeacherByIdPort;
     private final Validator validator;
 
     @Override
@@ -27,6 +31,8 @@ public final class UpdateTfcService implements UpdateTfcUseCase {
 
         final TfcId tfcId = new TfcId(command.id());
         final TfcModel current = findExistingTfcOrFail(tfcId);
+        final TeacherId teacherId = new TeacherId(command.advisorId());
+        ensureTeacherExistsOrFail(teacherId);
 
         final TfcModel tfcToUpdate =
                 TfcApplicationMapper.fromUpdateCommandToModel(command, current.getStatus());
@@ -45,5 +51,11 @@ public final class UpdateTfcService implements UpdateTfcUseCase {
         return getTfcByIdPort
                 .getById(tfcId)
                 .orElseThrow(() -> TfcNotFoundException.becauseIdWasNotFound(tfcId.value()));
+    }
+
+    private void ensureTeacherExistsOrFail(final TeacherId teacherId) {
+        getTeacherByIdPort
+                .getById(teacherId)
+                .orElseThrow(() -> TeacherNotFoundException.becauseIdWasNotFound(teacherId.value()));
     }
 }

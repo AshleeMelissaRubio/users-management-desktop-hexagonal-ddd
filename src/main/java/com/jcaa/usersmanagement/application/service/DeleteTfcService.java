@@ -2,6 +2,7 @@ package com.jcaa.usersmanagement.application.service;
 
 import com.jcaa.usersmanagement.application.port.in.DeleteTfcUseCase;
 import com.jcaa.usersmanagement.application.port.out.DeleteTfcPort;
+import com.jcaa.usersmanagement.application.port.out.GetTeacherByIdPort;
 import com.jcaa.usersmanagement.application.port.out.GetTfcByIdPort;
 import com.jcaa.usersmanagement.application.service.dto.command.DeleteTfcCommand;
 import com.jcaa.usersmanagement.application.service.mapper.TfcApplicationMapper;
@@ -18,6 +19,7 @@ public final class DeleteTfcService implements DeleteTfcUseCase {
 
     private final DeleteTfcPort deleteTfcPort;
     private final GetTfcByIdPort getTfcByIdPort;
+    private final GetTeacherByIdPort getTeacherByIdPort;
     private final Validator validator;
 
     @Override

@@ -17,14 +17,15 @@ public final class UpdateTfcHandler implements OperationHandler {
 
     @Override
     public void handle() {
-        final String id          = console.readRequired("TFC ID         : ");
-        final String title       = console.readRequired("New title      : ");
-        final String description = console.readRequired("New description: ");
-        final String advisorId   = console.readRequired("New advisor ID : ");
+        final String id          = console.readRequired("TFC ID                                                           : ");
+        final String title       = console.readRequired("New title                                                        : ");
+        final String description = console.readRequired("New description                                                  : ");
+        final String advisorId   = console.readRequired("New advisor ID                                                   : ");
+        final String status      = console.readRequired("Status (PROPOSED / IN_PROGRESS / SUBMITTED / APPROVED / REJECTED): ");
 
         try {
             final TfcResponse updated =
-                    tfcController.updateTfc(new UpdateTfcRequest(id, title, description, advisorId));
+                    tfcController.updateTfc(new UpdateTfcRequest(id, title, description, advisorId, status));
             console.println("\n  TFC updated successfully.");
             printer.print(updated);
         } catch (final TfcNotFoundException exception) {
