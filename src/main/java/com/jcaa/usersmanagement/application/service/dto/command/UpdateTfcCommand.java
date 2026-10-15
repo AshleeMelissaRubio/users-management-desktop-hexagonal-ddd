@@ -11,7 +11,8 @@ public record UpdateTfcCommand(
         @NotBlank(message = "description must not be blank")
         @Size(min = 10, message = "description must have at least 10 characters")
         String description,
-        @NotBlank(message = "advisorId must not be blank") String advisorId
+        @NotBlank(message = "advisorId must not be blank") String advisorId,
+        @NotBlank(message = "status must not be blank") String status
 ) {
 
 }
