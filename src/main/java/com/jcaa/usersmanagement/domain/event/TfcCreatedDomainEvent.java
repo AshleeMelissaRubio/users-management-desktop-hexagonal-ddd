@@ -21,6 +21,7 @@ public final class TfcCreatedDomainEvent extends DomainEvent {
         return Map.of(
                 "id", tfc.getId().value(),
                 "title", tfc.getTitle().value(),
+                "description", tfc.getDescription().value(),
                 "advisorId", tfc.getAdvisorId().value(),
                 "status", tfc.getStatus().name());
     }
