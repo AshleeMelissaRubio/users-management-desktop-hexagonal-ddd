@@ -25,6 +25,7 @@ public final class Main {
         console.println("       SYSTEM MAIN MENU           ");
         console.println("==================================");
         console.println("  [1] Users Management");
+        console.println("  [2] Teachers Management");
         console.println("  [3] TFC Management");
         console.println("  [0] Exit");
         console.println("==================================");
@@ -33,6 +34,7 @@ public final class Main {
 
         switch (option) {
           case "1" -> new UserManagementCli(container.userController(), console).start();
+          case "2" -> new TeacherManagementCli(container.teacherController(), console).start();
           case "3" -> new TfcManagementCli(container.tfcController(), console).start();
           case "0" -> {
             running = false;
