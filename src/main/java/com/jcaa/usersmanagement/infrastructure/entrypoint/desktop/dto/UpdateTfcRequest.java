@@ -4,4 +4,5 @@ public record UpdateTfcRequest(
         String id,
         String title,
         String description,
-        String advisorId) {}
+        String advisorId,
+        String status) {}

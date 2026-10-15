@@ -21,7 +21,7 @@ public final class TfcDesktopMapper {
 
     public static UpdateTfcCommand toUpdateCommand(final UpdateTfcRequest request) {
         return new UpdateTfcCommand(
-                request.id(), request.title(), request.description(), request.advisorId());
+                request.id(), request.title(), request.description(), request.advisorId(), request.status());
     }
 
     public static DeleteTfcCommand toDeleteCommand(final String id) {
